@@ -1,0 +1,23 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows=defaultdict(list) 
+        cols=defaultdict(list) 
+        squares=defaultdict(list)
+
+        for r in range(9):
+            for c in range(9):
+                if board[r][c]==".":
+                    continue
+                value=board[r][c]
+
+                if (value in rows[r]
+                    or value in cols[c]
+                    or value in squares[(r//3,c//3)]
+                ):
+                    return False
+                
+                rows[r].append(value)
+                cols[c].append(value)
+                squares[(r//3,c//3)].append(value)
+        
+        return True
